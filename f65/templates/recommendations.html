@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+
+{% block title %}Career Recommendations - CareerAI Navigator{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">
+      <i class="fa-solid fa-bullseye" style="color: var(--primary-blue);"></i> ML Career Recommendations
+    </h1>
+    <p class="page-subtitle">
+      Personalized recommendations computed via TF-IDF Vectorization and Cosine Similarity for <strong>{{ student_name }}</strong>.
+    </p>
+  </div>
+  <div style="display: flex; gap: 0.5rem;">
+    <a href="{{ url_for('analytics') }}" class="btn btn-secondary btn-sm">
+      <i class="fa-solid fa-chart-radar"></i> Detailed Analytics
+    </a>
+    <a href="{{ url_for('profile') }}" class="btn btn-primary btn-sm">
+      <i class="fa-solid fa-pen-to-square"></i> Modify Profile
+    </a>
+  </div>
+</div>
+
+<!-- Academic Disclaimer Alert -->
+<div class="alert alert-info">
+  <i class="fa-solid fa-circle-info"></i>
+  <div>
+    <strong>Academic Project Notice:</strong>
+    Match scores are algorithmic similarity percentages computed using TF-IDF feature analysis and Cosine Similarity. They estimate profile suitability and alignment, not guarantees or real-world hiring probabilities.
+  </div>
+</div>
+
+<!-- Top 3 Recommendations Grid -->
+<div style="margin-bottom: 2rem;">
+  <div class="page-header" style="margin-bottom: 1.25rem;">
+    <div>
+      <h2 class="page-title" style="font-size: 1.35rem;">
+        <i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> Top 3 Recommended Career Paths
+      </h2>
+      <p class="page-subtitle">Based on your technical skills, interests, and profile alignment.</p>
+    </div>
+  </div>
+
+  <div class="rec-grid">
+    {% for rec in top_recommendations %}
+      <div class="rec-card">
+        <!-- Rank Badge -->
+        <div class="rec-rank-badge top-{{ loop.index }}">
+          #{{ loop.index }} Match
+        </div>
+
+        <!-- Role & Category -->
+        <h3 class="rec-role">{{ rec.role }}</h3>
+        <div class="rec-category">
+          <i class="fa-solid fa-layer-group"></i> {{ rec.category }}
+        </div>
+
+        <!-- Score Bar -->
+        <div class="score-container">
+          <div class="score-header">
+            <span class="score-title">Suitability Match Score</span>
+            <span class="score-value">{{ rec.match_score }}%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" style="width: {{ rec.match_score }}%;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem;">
+            <span>Cosine Similarity: {{ rec.cosine_similarity }}</span>
+            <span>Skill Match: {{ rec.matched_count }}/{{ rec.required_count }}</span>
+          </div>
+        </div>
+
+        <!-- Role Overview -->
+        <p style="font-size: 0.88rem; color: var(--secondary-navy); margin-bottom: 1rem; line-height: 1.5;">
+          {{ rec.description }}
+        </p>
+
+        <!-- Matched Skills -->
+        <div class="skill-list-section">
+          <div class="skill-list-title matched">
+            <i class="fa-solid fa-circle-check"></i> Matched Skills ({{ rec.matched_skills|length }})
+          </div>
+          <div class="pill-container">
+            {% if rec.matched_skills %}
+              {% for skill in rec.matched_skills %}
+                <span class="pill pill-matched">{{ skill }}</span>
+              {% endfor %}
+            {% else %}
+              <span style="font-size: 0.8rem; color: var(--text-muted); font-style: italic;">No direct skill matches yet.</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Missing Skills / Skills Gap -->
+        <div class="skill-list-section">
+          <div class="skill-list-title missing">
+            <i class="fa-solid fa-circle-exclamation"></i> Skills to Learn ({{ rec.missing_skills|length }})
+          </div>
+          <div class="pill-container">
+            {% for skill in rec.missing_skills[:6] %}
+              <span class="pill pill-missing">{{ skill }}</span>
+            {% endfor %}
+            {% if rec.missing_skills|length > 6 %}
+              <span class="pill pill-missing">+{{ rec.missing_skills|length - 6 }} more</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- ML Explanation Reasoning -->
+        <div class="explanation-box">
+          <i class="fa-solid fa-lightbulb" style="color: #f59e0b;"></i>
+          <span>{{ rec.explanation }}</span>
+        </div>
+
+        <!-- Key Meta -->
+        <div style="margin-bottom: 1rem; font-size: 0.82rem; color: var(--text-muted);">
+          <div><strong>Average Package (India):</strong> {{ rec.avg_salary }}</div>
+          <div><strong>Demand Level:</strong> <span style="color: var(--success-green); font-weight: 600;">{{ rec.demand_level }}</span></div>
+        </div>
+
+        <!-- Actions -->
+        <div class="rec-footer">
+          <a href="{{ url_for('roadmap') }}?role={{ rec.role|urlencode }}" class="btn btn-primary btn-sm" style="flex: 1;">
+            <i class="fa-solid fa-route"></i> Roadmap
+          </a>
+          <a href="{{ url_for('jobs') }}?role={{ rec.role|urlencode }}" class="btn btn-secondary btn-sm" style="flex: 1;">
+            <i class="fa-solid fa-briefcase"></i> View Jobs
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Comparison Chart Section -->
+<div class="card" style="margin-bottom: 2rem;">
+  <div class="card-header">
+    <h3 class="card-title">
+      <i class="fa-solid fa-chart-column" style="color: var(--primary-blue);"></i> Career Recommendation Comparison (All Roles)
+    </h3>
+  </div>
+  <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+    This chart compares your profile's algorithmic match score across all benchmark career disciplines.
+  </p>
+  <div class="chart-wrapper" style="height: 340px;">
+    <canvas id="allCareersChart"></canvas>
+  </div>
+</div>
+
+<!-- All Career Rankings Table -->
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">
+      <i class="fa-solid fa-table-list" style="color: var(--primary-blue);"></i> Complete Career Alignment Breakdown
+    </h3>
+  </div>
+  <div style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-muted);">
+          <th style="padding: 0.75rem;">Rank</th>
+          <th style="padding: 0.75rem;">Career Role</th>
+          <th style="padding: 0.75rem;">Category</th>
+          <th style="padding: 0.75rem;">Match Score</th>
+          <th style="padding: 0.75rem;">Cosine Sim</th>
+          <th style="padding: 0.75rem;">Matched Skills</th>
+          <th style="padding: 0.75rem;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in all_rankings %}
+          <tr style="border-bottom: 1px solid var(--border-color);">
+            <td style="padding: 0.75rem; font-weight: 700;">#{{ loop.index }}</td>
+            <td style="padding: 0.75rem; font-weight: 600; color: var(--primary-navy);">{{ r.role }}</td>
+            <td style="padding: 0.75rem; color: var(--text-muted);">{{ r.category }}</td>
+            <td style="padding: 0.75rem;">
+              <span style="font-weight: 700; color: var(--primary-blue);">{{ r.match_score }}%</span>
+            </td>
+            <td style="padding: 0.75rem; color: var(--text-muted);">{{ r.cosine_similarity }}</td>
+            <td style="padding: 0.75rem;">
+              <span style="color: var(--success-green); font-weight: 600;">{{ r.matched_count }}</span> / {{ r.required_count }}
+            </td>
+            <td style="padding: 0.75rem;">
+              <a href="{{ url_for('roadmap') }}?role={{ r.role|urlencode }}" class="btn btn-secondary btn-sm" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">
+                Roadmap
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  // Render Chart.js comparison chart
+  document.addEventListener('DOMContentLoaded', function() {
+    const chartElem = document.getElementById('allCareersChart');
+    if (!chartElem) return;
+
+    const ctx = chartElem.getContext('2d');
+    const labels = {{ chart_labels | tojson }};
+    const scores = {{ chart_scores | tojson }};
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Match Score (%)',
+          data: scores,
+          backgroundColor: scores.map((s, idx) => {
+            if (idx === 0) return '#2563eb';
+            if (idx === 1) return '#3b82f6';
+            if (idx === 2) return '#60a5fa';
+            return '#cbd5e1';
+          }),
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return ' Match Score: ' + context.parsed.y + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              callback: function(val) { return val + '%'; }
+            },
+            grid: { color: '#f1f5f9' }
+          },
+          x: {
+            grid: { display: false },
+            ticks: {
+              maxRotation: 45,
+              minRotation: 25,
+              font: { size: 11 }
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}

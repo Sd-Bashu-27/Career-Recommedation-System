@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% block title %}Home - AI-Based Career Path and Job Recommendation System{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-banner">
+  <div class="hero-tag">
+    <i class="fa-solid fa-graduation-cap"></i> Machine Learning Project &bull; B.Tech CSE
+  </div>
+  <h1 class="hero-title">
+    AI-Based Career Path & <br><span>Job Recommendation System</span>
+  </h1>
+  <p class="hero-lead">
+    Discover your ideal tech career trajectory using TF-IDF feature extraction and Cosine Similarity. Upload your resume or specify your skills to receive personalized career matches, skill gap analysis, interactive learning roadmaps, and matching jobs.
+  </p>
+  <div class="hero-actions">
+    <a href="{{ url_for('profile') }}" class="btn btn-primary">
+      <i class="fa-solid fa-file-arrow-up"></i> Upload Resume & Get Recommendations
+    </a>
+    <a href="{{ url_for('roadmap') }}" class="btn btn-outline">
+      <i class="fa-solid fa-map-location-dot"></i> Explore Learning Roadmaps
+    </a>
+    <a href="{{ url_for('about') }}" class="btn btn-outline">
+      <i class="fa-solid fa-brain"></i> How ML Works
+    </a>
+  </div>
+</section>
+
+<!-- System Highlights / Stats Counter -->
+<section class="stats-strip">
+  <div class="stat-box">
+    <div class="stat-icon blue">
+      <i class="fa-solid fa-microchip"></i>
+    </div>
+    <div>
+      <div class="stat-number">TF-IDF + Cosine</div>
+      <div class="stat-label">Explainable Machine Learning</div>
+    </div>
+  </div>
+
+  <div class="stat-box">
+    <div class="stat-icon green">
+      <i class="fa-solid fa-briefcase"></i>
+    </div>
+    <div>
+      <div class="stat-number">10+ Careers</div>
+      <div class="stat-label">Curated Tech Specializations</div>
+    </div>
+  </div>
+
+  <div class="stat-box">
+    <div class="stat-icon purple">
+      <i class="fa-solid fa-file-pdf"></i>
+    </div>
+    <div>
+      <div class="stat-number">PyPDF2</div>
+      <div class="stat-label">Instant Resume Parsing</div>
+    </div>
+  </div>
+
+  <div class="stat-box">
+    <div class="stat-icon orange">
+      <i class="fa-solid fa-chart-simple"></i>
+    </div>
+    <div>
+      <div class="stat-number">Chart.js</div>
+      <div class="stat-label">Real-Time Skill Gap Analytics</div>
+    </div>
+  </div>
+</section>
+
+<!-- Core Features Section -->
+<section style="margin-bottom: 2.5rem;">
+  <div class="page-header" style="margin-bottom: 1.5rem;">
+    <div>
+      <h2 class="page-title" style="font-size: 1.5rem;">
+        <i class="fa-solid fa-cubes-stacked" style="color: var(--primary-blue);"></i> Core System Modules
+      </h2>
+      <p class="page-subtitle">Designed to help students identify their technical strengths and prepare for entry-level tech roles.</p>
+    </div>
+  </div>
+
+  <div class="rec-grid">
+    <!-- Card 1: Resume Parsing -->
+    <div class="card">
+      <div style="font-size: 2rem; color: var(--primary-blue); margin-bottom: 1rem;">
+        <i class="fa-solid fa-file-invoice"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-navy);">
+        Automated Resume Extraction
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem; line-height: 1.6;">
+        Upload your existing PDF resume. The system extracts text using PyPDF2, scans against 80+ technical skills, and pre-populates your profile with manual fallback options.
+      </p>
+      <div style="margin-top: auto;">
+        <a href="{{ url_for('profile') }}" class="btn btn-secondary btn-sm btn-block">
+          Upload Resume <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2: ML Career Recommender -->
+    <div class="card">
+      <div style="font-size: 2rem; color: var(--accent-indigo); margin-bottom: 1rem;">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-navy);">
+        Machine Learning Matcher
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem; line-height: 1.6;">
+        Converts your skills and interests into TF-IDF vector space, computing Cosine Similarity against benchmark career profiles. Shows Top 3 matches with skill gaps and reasoning.
+      </p>
+      <div style="margin-top: auto;">
+        <a href="{{ url_for('recommendations') }}" class="btn btn-secondary btn-sm btn-block">
+          View Recommendations <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3: Step-by-Step Learning Roadmap -->
+    <div class="card">
+      <div style="font-size: 2rem; color: var(--success-green); margin-bottom: 1rem;">
+        <i class="fa-solid fa-timeline"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-navy);">
+        Interactive Learning Roadmaps
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem; line-height: 1.6;">
+        Follow curated 3-phase roadmaps (Beginner, Intermediate, Advanced) with suggested projects, topics to master, and an interactive checklist that saves progress.
+      </p>
+      <div style="margin-top: auto;">
+        <a href="{{ url_for('roadmap') }}" class="btn btn-secondary btn-sm btn-block">
+          View Roadmaps <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 4: Skill Gap Analytics -->
+    <div class="card">
+      <div style="font-size: 2rem; color: var(--warning-amber); margin-bottom: 1rem;">
+        <i class="fa-solid fa-chart-radar"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-navy);">
+        Visual Analytics Dashboard
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem; line-height: 1.6;">
+        Chart.js powered radar graphs, Doughnut charts for acquired vs missing skills, and bar comparisons across all tech disciplines to highlight growth areas.
+      </p>
+      <div style="margin-top: auto;">
+        <a href="{{ url_for('analytics') }}" class="btn btn-secondary btn-sm btn-block">
+          Open Analytics <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 5: Demonstrative Job Portal -->
+    <div class="card">
+      <div style="font-size: 2rem; color: var(--accent-cyan); margin-bottom: 1rem;">
+        <i class="fa-solid fa-briefcase"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-navy);">
+        Demonstrative Job Portal
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem; line-height: 1.6;">
+        Explore sample fresher job openings matched to your skills, with company names, salary ranges, and filters by role and location (clearly tagged as academic demonstration data).
+      </p>
+      <div style="margin-top: auto;">
+        <a href="{{ url_for('jobs') }}" class="btn btn-secondary btn-sm btn-block">
+          Explore Jobs <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 6: SQLite History & Profiles -->
+    <div class="card">
+      <div style="font-size: 2rem; color: var(--info-sky); margin-bottom: 1rem;">
+        <i class="fa-solid fa-database"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-navy);">
+        Persistent SQLite Storage
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem; line-height: 1.6;">
+        Student profiles, past recommendation queries, and completed roadmap checkpoints are safely archived in an embedded SQLite database for ongoing academic review.
+      </p>
+      <div style="margin-top: auto;">
+        <a href="{{ url_for('history') }}" class="btn btn-secondary btn-sm btn-block">
+          View History <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Step-by-Step Workflow Guide -->
+<section class="card" style="margin-bottom: 2.5rem; background: #ffffff;">
+  <div class="card-header">
+    <h3 class="card-title">
+      <i class="fa-solid fa-stairs" style="color: var(--primary-blue);"></i> System Workflow: From Input to Career Readiness
+    </h3>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+    <div style="text-align: center; padding: 1rem;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eff6ff; color: var(--primary-blue); font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem;">1</div>
+      <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Enter Skills / Resume</h4>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">Upload your PDF resume or manually pick your technical skills and interests.</p>
+    </div>
+
+    <div style="text-align: center; padding: 1rem;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eff6ff; color: var(--primary-blue); font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem;">2</div>
+      <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">TF-IDF Vectorization</h4>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">The ML model extracts term frequency and inverse document frequency weights.</p>
+    </div>
+
+    <div style="text-align: center; padding: 1rem;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eff6ff; color: var(--primary-blue); font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem;">3</div>
+      <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Cosine Similarity Match</h4>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">Calculates cosine distance between profile vector and 10+ career benchmarks.</p>
+    </div>
+
+    <div style="text-align: center; padding: 1rem;">
+      <div style="width: 44px; height: 44px; border-radius: 50%; background: #eff6ff; color: var(--primary-blue); font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.75rem;">4</div>
+      <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem;">Roadmap & Job Fit</h4>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">Inspect missing skills, explore step-by-step project tasks, and see matching demo jobs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Academic Presentation Disclaimer Alert -->
+<div class="alert alert-info">
+  <i class="fa-solid fa-graduation-cap"></i>
+  <div>
+    <strong>Academic Project Notice:</strong>
+    Recommendation scores are algorithmic estimates measuring profile and skill similarity using TF-IDF and Cosine Similarity. They represent suitability metrics rather than guaranteed real-world hiring probabilities.
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}About & ML Architecture - CareerAI Navigator{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">
+      <i class="fa-solid fa-graduation-cap" style="color: var(--primary-blue);"></i> About Project & ML Methodology
+    </h1>
+    <p class="page-subtitle">Academic documentation, algorithmic explanation, and architectural blueprint for college presentation.</p>
+  </div>
+</div>
+
+<!-- Project Overview Card -->
+<div class="card" style="margin-bottom: 2rem;">
+  <div class="card-header">
+    <h2 class="card-title">
+      <i class="fa-solid fa-bullseye" style="color: var(--primary-blue);"></i> Project Abstract & Objectives
+    </h2>
+  </div>
+  <p style="font-size: 0.95rem; color: var(--secondary-navy); line-height: 1.7; margin-bottom: 1rem;">
+    The <strong>AI-Based Career Path and Job Recommendation System</strong> is an explainable machine learning application engineered to bridge the gap between undergraduate academic training and current IT industry hiring standards. By processing student resumes via <code>PyPDF2</code> and mapping candidate profiles against benchmark technical career profiles using <strong>TF-IDF Vectorization</strong> and <strong>Cosine Similarity</strong>, the system provides transparent career matching, granular skill gap identification, step-by-step 6-month learning roadmaps, and demonstrative job opportunities.
+  </p>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 1.25rem;">
+    <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-color);">
+      <strong style="color: var(--primary-blue); display: block; margin-bottom: 0.25rem;">Student Demographics</strong>
+      <span style="font-size: 0.88rem; color: var(--text-muted);">B.Tech Computer Science & Engineering (3rd Year) Machine Learning Project</span>
+    </div>
+    <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-color);">
+      <strong style="color: var(--primary-blue); display: block; margin-bottom: 0.25rem;">Core ML Paradigm</strong>
+      <span style="font-size: 0.88rem; color: var(--text-muted);">Content-Based Filtering using TF-IDF & Cosine Similarity in n-dimensional vector space</span>
+    </div>
+    <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-color);">
+      <strong style="color: var(--primary-blue); display: block; margin-bottom: 0.25rem;">Zero External API Cost</strong>
+      <span style="font-size: 0.88rem; color: var(--text-muted);">Runs 100% locally with open-source Scikit-learn, SQLite, and Flask</span>
+    </div>
+  </div>
+</div>
+
+<!-- Machine Learning Algorithm Details -->
+<div class="card" style="margin-bottom: 2rem;">
+  <div class="card-header">
+    <h2 class="card-title">
+      <i class="fa-solid fa-brain" style="color: var(--accent-indigo);"></i> How the Machine Learning Algorithm Works
+    </h2>
+  </div>
+  
+  <p style="font-size: 0.95rem; color: var(--secondary-navy); margin-bottom: 1.5rem; line-height: 1.7;">
+    The system uses an explainable, content-based recommendation approach. Unlike black-box neural networks, this approach gives exact mathematical reasons for every recommendation, making it ideal for academic presentations.
+  </p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+    <!-- Step 1: TF-IDF -->
+    <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 1.25rem; border-left: 4px solid var(--primary-blue);">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.5rem;">
+        1. TF-IDF Feature Representation
+      </h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
+        <strong>Term Frequency - Inverse Document Frequency (TF-IDF)</strong> converts technical keywords, skills, and interests into meaningful numerical vectors.
+      </p>
+      <div style="background: #ffffff; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-family: monospace; font-size: 0.85rem; color: var(--primary-navy); margin-bottom: 0.75rem;">
+        TF(t, d) = (Count of term t in document d) / (Total terms in d)<br>
+        IDF(t, D) = log( (1 + Total Docs N) / (1 + Docs with term t) ) + 1<br>
+        TF-IDF(t, d, D) = TF(t, d) &times; IDF(t, D)
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">
+        Rare specialized terms (e.g. <em>Kubernetes, PyTorch, Wireshark</em>) receive higher weights than generic words.
+      </p>
+    </div>
+
+    <!-- Step 2: Cosine Similarity -->
+    <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 1.25rem; border-left: 4px solid var(--success-green);">
+      <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.5rem;">
+        2. Cosine Similarity Measurement
+      </h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
+        Cosine similarity calculates the cosine of the angle between the student's vector <code>u</code> and career profile vector <code>v</code> in multi-dimensional feature space:
+      </p>
+      <div style="background: #ffffff; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-family: monospace; font-size: 0.88rem; color: var(--primary-navy); margin-bottom: 0.75rem;">
+        Cosine Similarity(u, v) = (u &bull; v) / ( ||u|| &times; ||v|| )
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">
+        A score of 1.0 represents collinear alignment, while 0.0 denotes orthogonality (no shared skills).
+      </p>
+    </div>
+  </div>
+
+  <!-- Step 3: Hybrid Scoring Formula -->
+  <div style="background: #eff6ff; border-radius: var(--radius-md); padding: 1.25rem; border: 1px solid #bfdbfe;">
+    <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 0.4rem;">
+      3. Explainable Composite Scoring Formula
+    </h3>
+    <p style="font-size: 0.88rem; color: var(--secondary-navy); line-height: 1.6;">
+      To balance semantic text similarity with strict prerequisite skill matching, the final score combines:
+    </p>
+    <div style="background: #ffffff; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid #93c5fd; font-family: monospace; font-size: 0.88rem; color: var(--primary-blue); margin: 0.5rem 0;">
+      Final Match Score = [ (Cosine Similarity &times; 0.65) + (Skill Overlap Ratio &times; 0.35) + Preference Boost ] &times; 100
+    </div>
+    <p style="font-size: 0.82rem; color: var(--text-muted);">
+      *Skill Overlap Ratio = (Count of Matched Skills) / (Total Required Skills for Career Role).
+    </p>
+  </div>
+</div>
+
+<!-- Technology Stack Details -->
+<div class="card" style="margin-bottom: 2rem;">
+  <div class="card-header">
+    <h2 class="card-title">
+      <i class="fa-solid fa-layer-group" style="color: var(--primary-blue);"></i> Technology Stack Breakdown
+    </h2>
+  </div>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;">
+    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem;">
+      <div style="font-size: 1.5rem; color: #2563eb; margin-bottom: 0.5rem;"><i class="fa-brands fa-python"></i></div>
+      <h4 style="font-weight: 700; color: var(--primary-navy);">Python Flask</h4>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">Lightweight WSGI web server, routing endpoints, request handling, and template rendering.</p>
+    </div>
+
+    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem;">
+      <div style="font-size: 1.5rem; color: #f59e0b; margin-bottom: 0.5rem;"><i class="fa-solid fa-microchip"></i></div>
+      <h4 style="font-weight: 700; color: var(--primary-navy);">Scikit-Learn</h4>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">TF-IDF vectorizer, stop-word filtering, n-gram extraction, and cosine distance calculation.</p>
+    </div>
+
+    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem;">
+      <div style="font-size: 1.5rem; color: #10b981; margin-bottom: 0.5rem;"><i class="fa-solid fa-database"></i></div>
+      <h4 style="font-weight: 700; color: var(--primary-navy);">SQLite Database</h4>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">Zero-configuration relational database auto-initialized on first run for profiles and history.</p>
+    </div>
+
+    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem;">
+      <div style="font-size: 1.5rem; color: #ef4444; margin-bottom: 0.5rem;"><i class="fa-solid fa-file-pdf"></i></div>
+      <h4 style="font-weight: 700; color: var(--primary-navy);">PyPDF2</h4>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">Extracts text from binary PDF resumes and parses technical keywords against skill dictionary.</p>
+    </div>
+
+    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem;">
+      <div style="font-size: 1.5rem; color: #8b5cf6; margin-bottom: 0.5rem;"><i class="fa-solid fa-chart-line"></i></div>
+      <h4 style="font-weight: 700; color: var(--primary-navy);">Chart.js</h4>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">Responsive client-side HTML5 Canvas rendering for radar, doughnut, and bar charts.</p>
+    </div>
+
+    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem;">
+      <div style="font-size: 1.5rem; color: #0284c7; margin-bottom: 0.5rem;"><i class="fa-brands fa-html5"></i></div>
+      <h4 style="font-weight: 700; color: var(--primary-navy);">HTML5 & CSS3</h4>
+      <p style="font-size: 0.82rem; color: var(--text-muted);">Pure Vanilla CSS design system with CSS custom properties, grid layouts, and zero heavy frameworks.</p>
+    </div>
+  </div>
+</div>
+
+<!-- College Viva Q&A Cheat Sheet -->
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">
+      <i class="fa-solid fa-comments" style="color: var(--primary-blue);"></i> College Project Presentation & Viva Talking Points
+    </h2>
+  </div>
+  
+  <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;">
+    <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-color);">
+      <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.35rem;">
+        Q1: Why did you choose TF-IDF + Cosine Similarity over Deep Learning or LLMs?
+      </h4>
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+        <strong>Answer:</strong> Deep neural models and LLMs act as black boxes, require massive datasets and GPUs, and can hallucinate qualifications. TF-IDF and Cosine Similarity are mathematically transparent, deterministic, explainable, run instantaneously on any student laptop with 0 latency or API fees, and precisely satisfy the Machine Learning course project syllabus.
+      </p>
+    </div>
+
+    <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-color);">
+      <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.35rem;">
+        Q2: How does the system handle scanned or image-based PDF resumes?
+      </h4>
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+        <strong>Answer:</strong> PyPDF2 extracts text layers. If a user uploads a scanned or empty PDF, the system catches the exception gracefully, alerts the student with a friendly warning message, and preserves manual skill entry so the recommendation flow never breaks.
+      </p>
+    </div>
+
+    <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-color);">
+      <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.35rem;">
+        Q3: How are the recommended skills and jobs verified?
+      </h4>
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+        <strong>Answer:</strong> The career benchmark dataset maps skills required in 2026 entry-level job descriptions. The system computes set intersections to explicitly isolate acquired skills from missing skills, driving the personalized 6-month roadmap.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,542 @@
+{
+  "Full Stack Developer": {
+    "role": "Full Stack Developer",
+    "overview": "Master both client-side and server-side technologies, database architecture, and full application deployment from scratch.",
+    "stages": [
+      {
+        "id": "fs_stage1",
+        "name": "Phase 1: Web Fundamentals & Frontend Basics",
+        "timeframe": "Weeks 1 - 6 (Month 1-2)",
+        "skills": ["HTML5", "CSS3", "JavaScript (ES6+)", "Git & GitHub", "Responsive Design"],
+        "topics": [
+          "Semantic HTML tags and accessibility basics",
+          "CSS Flexbox, Grid, Media Queries, and Animations",
+          "DOM Manipulation, Event Handling, and Asynchronous JavaScript (Promises, async/await)",
+          "Version control fundamentals with Git, branching, and pushing to GitHub"
+        ],
+        "projects": [
+          {
+            "title": "Interactive Personal Portfolio Website",
+            "description": "Create a modern, responsive portfolio with dark/light mode toggle, contact form validation, and dynamic project filtering."
+          },
+          {
+            "title": "Dynamic Task / Habit Tracker",
+            "description": "Build a task manager that utilizes browser LocalStorage, drag-and-drop tasks, and category filtering."
+          }
+        ],
+        "tasks": [
+          {"id": "fs_task1", "text": "Master Flexbox and CSS Grid layout concepts"},
+          {"id": "fs_task2", "text": "Build 3 responsive landing pages without external frameworks"},
+          {"id": "fs_task3", "text": "Learn ES6+ features: Destructuring, Arrow functions, Array methods (map, filter, reduce)"},
+          {"id": "fs_task4", "text": "Set up a GitHub profile and push daily code commits"}
+        ]
+      },
+      {
+        "id": "fs_stage2",
+        "name": "Phase 2: Modern Frontend & Backend Development",
+        "timeframe": "Weeks 7 - 14 (Month 3-4)",
+        "skills": ["React.js", "Node.js", "Express.js", "REST APIs", "SQL / PostgreSQL", "MongoDB"],
+        "topics": [
+          "React Component lifecycle, Hooks (useState, useEffect, useContext), and React Router",
+          "Building robust RESTful APIs with Node.js and Express",
+          "Database modeling with relational SQL and NoSQL MongoDB",
+          "JWT (JSON Web Token) authentication and password hashing with bcrypt"
+        ],
+        "projects": [
+          {
+            "title": "E-Commerce Web Storefront with Cart & Auth",
+            "description": "Full-stack application with user authentication, product catalogs, shopping cart state management, and mock checkout."
+          },
+          {
+            "title": "Blogging Platform with Markdown & Comments",
+            "description": "REST API-driven blog with post creation, image uploads, comment sections, and user profiles."
+          }
+        ],
+        "tasks": [
+          {"id": "fs_task5", "text": "Build a multi-page React application with state management"},
+          {"id": "fs_task6", "text": "Implement secure authentication with JWT and bcrypt in Express"},
+          {"id": "fs_task7", "text": "Write complex SQL JOIN queries and design relational schemas"},
+          {"id": "fs_task8", "text": "Test API endpoints thoroughly using Postman"}
+        ]
+      },
+      {
+        "id": "fs_stage3",
+        "name": "Phase 3: Production Deployment, DevOps & System Design",
+        "timeframe": "Weeks 15 - 24 (Month 5-6)",
+        "skills": ["Docker", "CI/CD Pipelines", "AWS / Vercel / Render", "WebSockets", "System Design"],
+        "topics": [
+          "Containerizing web applications using Docker and Docker Compose",
+          "Continuous Integration & Continuous Deployment (CI/CD) with GitHub Actions",
+          "Real-time communication using Socket.io or WebSockets",
+          "Basic system design: caching with Redis, load balancing, and database indexing"
+        ],
+        "projects": [
+          {
+            "title": "Real-Time Collaboration Dashboard / Chat App",
+            "description": "A collaborative workspace with real-time room messaging, live status indicators, and persistent chat logs."
+          },
+          {
+            "title": "Dockerized Microservice Architecture",
+            "description": "Deploy separate frontend, backend, and database containers using Docker Compose on cloud hosting."
+          }
+        ],
+        "tasks": [
+          {"id": "fs_task9", "text": "Containerize a full-stack MERN application using Docker"},
+          {"id": "fs_task10", "text": "Set up a GitHub Actions workflow for automated testing and deployment"},
+          {"id": "fs_task11", "text": "Study basic web security: CORS, XSS, CSRF, and SQL Injection prevention"},
+          {"id": "fs_task12", "text": "Deploy a live project with a custom domain on Render or Vercel"}
+        ]
+      }
+    ]
+  },
+  "Data Analyst": {
+    "role": "Data Analyst",
+    "overview": "Learn to extract, clean, analyze, visualize, and communicate insights from structured and unstructured business data.",
+    "stages": [
+      {
+        "id": "da_stage1",
+        "name": "Phase 1: Excel Mastery & Core SQL",
+        "timeframe": "Weeks 1 - 6 (Month 1-2)",
+        "skills": ["Advanced Excel", "SQL Queries", "Relational Databases", "Descriptive Statistics"],
+        "topics": [
+          "Pivot tables, VLOOKUP, XLOOKUP, INDEX/MATCH, and conditional formatting in Excel",
+          "SQL SELECT, WHERE, GROUP BY, HAVING, ORDER BY, and Aggregate functions",
+          "Multi-table JOINs (INNER, LEFT, RIGHT, FULL) and Subqueries",
+          "Basic statistics: Mean, Median, Mode, Standard Deviation, and Quartiles"
+        ],
+        "projects": [
+          {
+            "title": "Retail Sales Performance Spreadsheet Model",
+            "description": "An interactive Excel workbook with dynamic pivot charts, KPI cards, and sales forecasting formulas."
+          },
+          {
+            "title": "Hospital Management Database SQL Analysis",
+            "description": "Write 20+ analytical SQL queries extracting patient admission trends, revenue per department, and doctor workloads."
+          }
+        ],
+        "tasks": [
+          {"id": "da_task1", "text": "Complete 50 SQL practice challenges on HackerRank or LeetCode"},
+          {"id": "da_task2", "text": "Master Excel formula shortcuts and Pivot Table slicers"},
+          {"id": "da_task3", "text": "Understand the difference between correlation and causation"},
+          {"id": "da_task4", "text": "Learn data cleaning techniques: removing duplicates and handling missing values"}
+        ]
+      },
+      {
+        "id": "da_stage2",
+        "name": "Phase 2: Python Data Stack & EDA",
+        "timeframe": "Weeks 7 - 14 (Month 3-4)",
+        "skills": ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn", "Jupyter Notebook"],
+        "topics": [
+          "Data structures in Pandas: Series and DataFrames",
+          "Data wrangling, merging, filtering, and imputation with Pandas",
+          "Statistical visualizations: Histograms, Boxplots, Heatmaps, and Scatter plots",
+          "Hypothesis testing basics (p-values, t-tests, and chi-square tests)"
+        ],
+        "projects": [
+          {
+            "title": "Exploratory Data Analysis on Customer Churn",
+            "description": "Analyze a telecommunications customer dataset to identify factors driving churn with detailed Seaborn charts."
+          },
+          {
+            "title": "Global COVID-19 or World Bank Trends Analysis",
+            "description": "Perform comprehensive time-series analysis exploring socioeconomic indicators over a decade."
+          }
+        ],
+        "tasks": [
+          {"id": "da_task5", "text": "Perform complete exploratory data analysis on a Kaggle dataset"},
+          {"id": "da_task6", "text": "Master Pandas groupby, agg, and pivot_table functions"},
+          {"id": "da_task7", "text": "Generate publication-ready charts with custom colors and labels"},
+          {"id": "da_task8", "text": "Document analytical findings in clear markdown inside Jupyter notebooks"}
+        ]
+      },
+      {
+        "id": "da_stage3",
+        "name": "Phase 3: Business Intelligence Dashboards & Storytelling",
+        "timeframe": "Weeks 15 - 24 (Month 5-6)",
+        "skills": ["Power BI", "Tableau", "DAX Formulas", "Executive Storytelling", "Automated Reporting"],
+        "topics": [
+          "Data modeling, Star Schema, and relationships in Power BI",
+          "Creating calculated columns and DAX measures (CALCULATE, FILTER, SUMX)",
+          "Building interactive executive dashboards with drill-downs and cross-filtering",
+          "Communicating data-driven business recommendations to non-technical stakeholders"
+        ],
+        "projects": [
+          {
+            "title": "Executive HR & Employee Attrition Dashboard (Power BI)",
+            "description": "An interactive 3-page Power BI report tracking attrition rates, performance metrics, and salary benchmarks."
+          },
+          {
+            "title": "E-Commerce Supply Chain & Delivery Analytics (Tableau)",
+            "description": "A Tableau visual story mapping fulfillment times, shipment delays, and regional revenue."
+          }
+        ],
+        "tasks": [
+          {"id": "da_task9", "text": "Publish a live dashboard to Power BI Service or Tableau Public"},
+          {"id": "da_task10", "text": "Write a one-page executive memo summarizing analytical findings"},
+          {"id": "da_task11", "text": "Prepare a video or presentation walkthrough of your dashboard"},
+          {"id": "da_task12", "text": "Create a GitHub repository showcasing portfolio projects and SQL scripts"}
+        ]
+      }
+    ]
+  },
+  "Machine Learning Engineer": {
+    "role": "Machine Learning Engineer",
+    "overview": "Build mathematical foundations, train classical and modern machine learning algorithms, evaluate model metrics, and deploy models into production.",
+    "stages": [
+      {
+        "id": "ml_stage1",
+        "name": "Phase 1: Math Foundations & Python Scikit-Learn",
+        "timeframe": "Weeks 1 - 6 (Month 1-2)",
+        "skills": ["Python", "NumPy", "Pandas", "Linear Algebra", "Calculus & Probability", "Scikit-Learn"],
+        "topics": [
+          "Vectors, matrices, dot products, eigenvalues, and gradient descent intuition",
+          "Supervised learning: Linear Regression, Logistic Regression, Decision Trees, Random Forests",
+          "Unsupervised learning: K-Means Clustering, PCA (Principal Component Analysis)",
+          "Data preprocessing: Standard scaling, One-Hot Encoding, Train-Test Split, and Cross-Validation"
+        ],
+        "projects": [
+          {
+            "title": "House Price Prediction Model",
+            "description": "Build and compare Multiple Linear Regression, Ridge, and Random Forest regressors with RMSE evaluation."
+          },
+          {
+            "title": "Heart Disease or Diabetes Risk Classifier",
+            "description": "Train classification algorithms with hyperparameter tuning, ROC-AUC curve plotting, and confusion matrix analysis."
+          }
+        ],
+        "tasks": [
+          {"id": "ml_task1", "text": "Implement Gradient Descent algorithm from scratch in Python"},
+          {"id": "ml_task2", "text": "Master Scikit-learn Pipeline and ColumnTransformer modules"},
+          {"id": "ml_task3", "text": "Understand evaluation metrics: Precision, Recall, F1-Score, and ROC-AUC"},
+          {"id": "ml_task4", "text": "Participate in a beginner Kaggle competition (e.g. Titanic / Housing)"}
+        ]
+      },
+      {
+        "id": "ml_stage2",
+        "name": "Phase 2: Advanced ML, NLP & Model Tuning",
+        "timeframe": "Weeks 7 - 14 (Month 3-4)",
+        "skills": ["XGBoost", "LightGBM", "TF-IDF & Cosine Similarity", "Hyperparameter Tuning", "Ensemble Methods"],
+        "topics": [
+          "Gradient Boosting algorithms (XGBoost, CatBoost) and stacking classifiers",
+          "Natural Language Processing (NLP): Tokenization, Stopwords, Lemmatization, TF-IDF vectorization",
+          "Feature selection techniques and handling imbalanced datasets (SMOTE)",
+          "Hyperparameter optimization using GridSearchCV and Optuna"
+        ],
+        "projects": [
+          {
+            "title": "Content-Based Book / Movie Recommender System",
+            "description": "Build an NLP recommender calculating cosine similarity between text metadata vectors."
+          },
+          {
+            "title": "Customer Credit Default Predictor using XGBoost",
+            "description": "A high-accuracy credit risk classifier handling class imbalance with SMOTE and threshold calibration."
+          }
+        ],
+        "tasks": [
+          {"id": "ml_task5", "text": "Build a TF-IDF text similarity recommendation pipeline"},
+          {"id": "ml_task6", "text": "Perform Bayesian optimization with Optuna on an XGBoost model"},
+          {"id": "ml_task7", "text": "Explain feature importances using SHAP (SHapley Additive exPlanations)"},
+          {"id": "ml_task8", "text": "Save and load trained models cleanly using joblib and pickle"}
+        ]
+      },
+      {
+        "id": "ml_stage3",
+        "name": "Phase 3: Deep Learning & MLOps Deployment",
+        "timeframe": "Weeks 15 - 24 (Month 5-6)",
+        "skills": ["PyTorch / TensorFlow", "FastAPI / Flask", "Docker", "Model Monitoring", "MLflow"],
+        "topics": [
+          "Artificial Neural Networks (ANN), Activation functions, and Backpropagation",
+          "Convolutional Neural Networks (CNN) for image classification basics",
+          "Packaging ML models as REST APIs using Flask or FastAPI",
+          "Dockerizing ML inference services and experiment tracking with MLflow"
+        ],
+        "projects": [
+          {
+            "title": "End-to-End Career / Resume AI Web Service",
+            "description": "Deploy a scikit-learn recommendation engine as an interactive web service with Flask, SQLite, and responsive UI."
+          },
+          {
+            "title": "Medical Chest X-Ray Classifier with Transfer Learning",
+            "description": "Fine-tune a pretrained ResNet model in PyTorch and expose inference via a lightweight API."
+          }
+        ],
+        "tasks": [
+          {"id": "ml_task9", "text": "Wrap a trained model in a Flask or FastAPI microservice with JSON I/O"},
+          {"id": "ml_task10", "text": "Containerize the machine learning prediction web service with Docker"},
+          {"id": "ml_task11", "text": "Track training experiments, parameters, and loss curves with MLflow"},
+          {"id": "ml_task12", "text": "Deploy the ML web application live to cloud (Render, AWS, or Hugging Face Spaces)"}
+        ]
+      }
+    ]
+  },
+  "Python Developer": {
+    "role": "Python Developer",
+    "overview": "Master core Python syntax, OOP design patterns, web development frameworks, database connectivity, and backend API engineering.",
+    "stages": [
+      {
+        "id": "py_stage1",
+        "name": "Phase 1: Core Python & Object-Oriented Programming",
+        "timeframe": "Weeks 1 - 6 (Month 1-2)",
+        "skills": ["Python 3", "OOP (Classes, Inheritance, Polymorphism)", "Data Structures", "File Handling", "Git"],
+        "topics": [
+          "Variables, control structures, list comprehensions, and generator expressions",
+          "Object-Oriented Programming principles: Encapsulation, Inheritance, Abstract classes",
+          "Exception handling, custom exceptions, and context managers (with statements)",
+          "Reading and writing CSV, JSON, and PDF files programmatically"
+        ],
+        "projects": [
+          {
+            "title": "CLI Student Gradebook & Record Management System",
+            "description": "An interactive command-line application persisting student records, calculating GPA, and exporting PDF reports."
+          },
+          {
+            "title": "Automated Web Scraper & Price Tracker",
+            "description": "Scrapes product prices using BeautifulSoup and sends automated alert notifications on discounts."
+          }
+        ],
+        "tasks": [
+          {"id": "py_task1", "text": "Solve 40 Python algorithms on LeetCode focusing on strings and dictionaries"},
+          {"id": "py_task2", "text": "Create custom Python classes utilizing dunder methods (__init__, __str__, __repr__)"},
+          {"id": "py_task3", "text": "Write clean Python following PEP 8 style standards"},
+          {"id": "py_task4", "text": "Build modular code using Python packages and virtual environments (venv)"}
+        ]
+      },
+      {
+        "id": "py_stage2",
+        "name": "Phase 2: Flask / Django Backend & Databases",
+        "timeframe": "Weeks 7 - 14 (Month 3-4)",
+        "skills": ["Flask", "Django", "SQLite / PostgreSQL", "SQLAlchemy", "RESTful APIs", "JWT"],
+        "topics": [
+          "Routing, request lifecycle, Jinja2 templates, and session management in Flask",
+          "ORM modeling, migrations, and relationships using SQLAlchemy",
+          "Building secure REST APIs with token-based authentication and input sanitization",
+          "Automated unit testing with pytest and unittest modules"
+        ],
+        "projects": [
+          {
+            "title": "Library Management Web Application",
+            "description": "A multi-user Flask portal allowing students to borrow books, search catalogs, and view return deadlines."
+          },
+          {
+            "title": "RESTful Event Booking API",
+            "description": "An API with role-based access control, ticket generation, and database transaction safety."
+          }
+        ],
+        "tasks": [
+          {"id": "py_task5", "text": "Build a complete CRUD application using Flask and SQLite"},
+          {"id": "py_task6", "text": "Implement database relationships (One-to-Many, Many-to-Many) with an ORM"},
+          {"id": "py_task7", "text": "Write automated unit tests with pytest achieving >80% test coverage"},
+          {"id": "py_task8", "text": "Handle file uploads securely with filename validation and size limits"}
+        ]
+      },
+      {
+        "id": "py_stage3",
+        "name": "Phase 3: Concurrency, Celery, Docker & Cloud Deployment",
+        "timeframe": "Weeks 15 - 24 (Month 5-6)",
+        "skills": ["AsyncIO", "Celery & Redis", "Docker", "Gunicorn", "PostgreSQL", "Cloud Deployment"],
+        "topics": [
+          "Asynchronous programming with Python AsyncIO and concurrent futures",
+          "Background task queues and scheduled jobs using Celery and Redis",
+          "Production WSGI servers: configuring Gunicorn with Nginx reverse proxy",
+          "Containerizing Python apps with Docker and deploying to production cloud servers"
+        ],
+        "projects": [
+          {
+            "title": "Asynchronous Batch PDF & Image Processing Service",
+            "description": "A Celery-powered background worker extracting text, resizing media, and emailing processed zip archives."
+          },
+          {
+            "title": "Production-Ready Microservice with Docker & CI/CD",
+            "description": "Full Python backend service deployed on cloud with automated GitHub Actions testing and Docker registry."
+          }
+        ],
+        "tasks": [
+          {"id": "py_task9", "text": "Implement asynchronous background processing using Celery and Redis"},
+          {"id": "py_task10", "text": "Write a multi-stage Dockerfile optimizing Python container image size"},
+          {"id": "py_task11", "text": "Configure Gunicorn workers and environment secrets securely"},
+          {"id": "py_task12", "text": "Deploy a Python web app live on Render, Railway, or AWS EC2"}
+        ]
+      }
+    ]
+  },
+  "Cybersecurity Analyst": {
+    "role": "Cybersecurity Analyst",
+    "overview": "Learn computer networking, operating systems security, vulnerability analysis, ethical hacking techniques, and incident defense.",
+    "stages": [
+      {
+        "id": "sec_stage1",
+        "name": "Phase 1: Networking, Linux & Security Fundamentals",
+        "timeframe": "Weeks 1 - 6 (Month 1-2)",
+        "skills": ["TCP/IP Networking", "Linux (Kali / Ubuntu)", "Bash Scripting", "Wireshark", "Cryptography"],
+        "topics": [
+          "OSI model, TCP/UDP protocols, DNS, DHCP, routing, and subnetting",
+          "Linux command line, file permissions, process management, and syslog inspection",
+          "Symmetric vs Asymmetric cryptography, hashing algorithms (SHA-256), and SSL/TLS",
+          "Packet capturing and network protocol inspection using Wireshark"
+        ],
+        "projects": [
+          {
+            "title": "Home Lab Network Packet Analysis Report",
+            "description": "Capture live network traffic with Wireshark to analyze handshake protocols and unencrypted data transmission."
+          },
+          {
+            "title": "Automated Linux System Hardening Bash Script",
+            "description": "A script that disables root SSH, sets up UFW firewall rules, and audits user accounts."
+          }
+        ],
+        "tasks": [
+          {"id": "sec_task1", "text": "Set up a virtual lab with Kali Linux and Ubuntu in VirtualBox / VMware"},
+          {"id": "sec_task2", "text": "Analyze 5 different PCAP packet capture files using Wireshark filters"},
+          {"id": "sec_task3", "text": "Configure UFW / iptables firewall rules to restrict open ports"},
+          {"id": "sec_task4", "text": "Solve 20 beginner rooms on TryHackMe (Pre-Security path)"}
+        ]
+      },
+      {
+        "id": "sec_stage2",
+        "name": "Phase 2: Vulnerability Assessment & Web App Security",
+        "timeframe": "Weeks 7 - 14 (Month 3-4)",
+        "skills": ["Nmap", "Metasploit", "Burp Suite", "OWASP Top 10", "Vulnerability Scanning"],
+        "topics": [
+          "Port scanning, banner grabbing, and network reconnaissance with Nmap",
+          "OWASP Top 10 web vulnerabilities: SQLi, XSS, CSRF, and Broken Authentication",
+          "Interception proxies, request tampering, and web testing using Burp Suite",
+          "Automated vulnerability scanners (Nessus, OpenVAS) and vulnerability scoring (CVSS)"
+        ],
+        "projects": [
+          {
+            "title": "OWASP Juice Shop Penetration Testing Audit",
+            "description": "Conduct a vulnerability assessment on the vulnerable Juice Shop app, finding and fixing 10+ security flaws."
+          },
+          {
+            "title": "Python Port Scanner & Vulnerability Banner Grabber",
+            "description": "Build a multithreaded network reconnaissance tool in Python using sockets."
+          }
+        ],
+        "tasks": [
+          {"id": "sec_task5", "text": "Perform thorough network enumeration using advanced Nmap scripts"},
+          {"id": "sec_task6", "text": "Exploit and remediate SQL Injection and XSS flaws in a sandbox lab"},
+          {"id": "sec_task7", "text": "Write a formal Security Vulnerability Assessment report with remediation advice"},
+          {"id": "sec_task8", "text": "Complete the TryHackMe Web Fundamentals or Jr Penetration Tester path"}
+        ]
+      },
+      {
+        "id": "sec_stage3",
+        "name": "Phase 3: SOC Operations, SIEM & Incident Response",
+        "timeframe": "Weeks 15 - 24 (Month 5-6)",
+        "skills": ["SIEM (Splunk / Elastic)", "Snort IDS/IPS", "Incident Response", "Malware Analysis Basics"],
+        "topics": [
+          "Security Information and Event Management (SIEM) log ingestion and correlation rules",
+          "Intrusion Detection and Prevention Systems (IDS/IPS) using Snort rules",
+          "Incident response lifecycle: Preparation, Detection, Containment, Eradication, and Recovery",
+          "Basic static malware analysis, file hashing, and threat intelligence feeds"
+        ],
+        "projects": [
+          {
+            "title": "Splunk SOC Monitoring & Attack Detection Lab",
+            "description": "Ingest web and authentication logs into Splunk to create alerts detecting brute force and credential stuffing attacks."
+          },
+          {
+            "title": "Comprehensive Enterprise Security Incident Response Plan",
+            "description": "Develop a standard operating procedure (SOP) detailing step-by-step containment for ransomware infection."
+          }
+        ],
+        "tasks": [
+          {"id": "sec_task9", "text": "Configure Splunk to ingest Windows Event Logs and create alert dashboards"},
+          {"id": "sec_task10", "text": "Write custom Snort rules to detect malicious payload signatures"},
+          {"id": "sec_task11", "text": "Participate in an online Capture The Flag (CTF) competition"},
+          {"id": "sec_task12", "text": "Study for CompTIA Security+ or Certified Ethical Hacker (CEH) certification"}
+        ]
+      }
+    ]
+  },
+  "Cloud Engineer": {
+    "role": "Cloud Engineer",
+    "overview": "Learn cloud infrastructure architecture, compute, networking, storage, infrastructure as code, and automated cloud deployments.",
+    "stages": [
+      {
+        "id": "cld_stage1",
+        "name": "Phase 1: Cloud Concepts, Linux & AWS Basics",
+        "timeframe": "Weeks 1 - 6 (Month 1-2)",
+        "skills": ["AWS Core Services", "Linux Administration", "Cloud Networking (VPC)", "IAM Security"],
+        "topics": [
+          "Cloud deployment models (IaaS, PaaS, SaaS) and shared responsibility model",
+          "AWS Identity and Access Management (IAM): Users, Roles, Policies, and MFA",
+          "Compute and Storage: EC2 instances, EBS volumes, S3 buckets, and lifecycle rules",
+          "Virtual Private Cloud (VPC): Subnets, Route Tables, Internet Gateways, and Security Groups"
+        ],
+        "projects": [
+          {
+            "title": "High-Availability Static Web Hosting on AWS S3 & CloudFront",
+            "description": "Deploy a globally distributed static website with HTTPS, S3 bucket policy restrictions, and CloudFront CDN caching."
+          },
+          {
+            "title": "Secure Two-Tier VPC Architecture on AWS",
+            "description": "Design a custom VPC with public subnets for web servers and private subnets for database instances with NAT Gateway."
+          }
+        ],
+        "tasks": [
+          {"id": "cld_task1", "text": "Create a free-tier AWS account and set up billing budget alerts"},
+          {"id": "cld_task2", "text": "Launch and SSH into an Amazon EC2 Linux instance and install a web server"},
+          {"id": "cld_task3", "text": "Configure IAM least-privilege policies with multi-factor authentication"},
+          {"id": "cld_task4", "text": "Understand AWS region vs availability zone redundancy"}
+        ]
+      },
+      {
+        "id": "cld_stage2",
+        "name": "Phase 2: Infrastructure as Code & Containerization",
+        "timeframe": "Weeks 7 - 14 (Month 3-4)",
+        "skills": ["Terraform", "Docker", "AWS ECS / EKS", "CloudWatch Monitoring", "Bash Automation"],
+        "topics": [
+          "Infrastructure as Code (IaC) syntax and state management with Terraform",
+          "Containerizing applications with Docker and pushing images to Amazon ECR",
+          "Container orchestration on AWS ECS (Elastic Container Service) with Fargate",
+          "Monitoring and logging with AWS CloudWatch alarms and metrics"
+        ],
+        "projects": [
+          {
+            "title": "Automated Cloud Provisioning with Terraform",
+            "description": "Write reusable Terraform HCL modules to provision a VPC, EC2 Auto Scaling group, and Application Load Balancer."
+          },
+          {
+            "title": "Serverless REST API with AWS Lambda & API Gateway",
+            "description": "Build a pay-per-request microservice storing data in DynamoDB without provisioning any servers."
+          }
+        ],
+        "tasks": [
+          {"id": "cld_task5", "text": "Write Terraform scripts to provision cloud infrastructure automatically"},
+          {"id": "cld_task6", "text": "Deploy a Dockerized web application to AWS ECS Fargate"},
+          {"id": "cld_task7", "text": "Configure an Application Load Balancer with target health checks"},
+          {"id": "cld_task8", "text": "Set up CloudWatch CPU alarms to trigger auto-scaling events"}
+        ]
+      },
+      {
+        "id": "cld_stage3",
+        "name": "Phase 3: Multi-Cloud, Kubernetes & Cloud Security",
+        "timeframe": "Weeks 15 - 24 (Month 5-6)",
+        "skills": ["Kubernetes", "Azure / GCP Basics", "CI/CD Deployment", "Cloud Cost Optimization"],
+        "topics": [
+          "Kubernetes architecture: Pods, Deployments, Services, ConfigMaps, and Ingress",
+          "Automated cloud deployments via GitHub Actions or AWS CodePipeline",
+          "Disaster recovery strategies (RPO and RTO) and cross-region backups",
+          "Cloud cost optimization strategies and Well-Architected Framework reviews"
+        ],
+        "projects": [
+          {
+            "title": "Production Kubernetes Cluster Deployment on EKS",
+            "description": "Deploy a microservice application on Amazon EKS with auto-scaling and ingress controllers."
+          },
+          {
+            "title": "Enterprise Cloud Migration & Disaster Recovery Blueprint",
+            "description": "Architect a documented multi-region failover strategy with automated snapshot replication."
+          }
+        ],
+        "tasks": [
+          {"id": "cld_task9", "text": "Deploy and expose a multi-pod application on Kubernetes"},
+          {"id": "cld_task10", "text": "Automate cloud deployment pipeline with GitHub Actions"},
+          {"id": "cld_task11", "text": "Audit an AWS infrastructure against the AWS Well-Architected Framework"},
+          {"id": "cld_task12", "text": "Study for AWS Certified Solutions Architect Associate (SAA-C03)"}
+        ]
+      }
+    ]
+  }
+}

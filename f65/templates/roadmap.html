@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block title %}Learning Roadmap - {{ roadmap.role }} - CareerAI Navigator{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">
+      <i class="fa-solid fa-route" style="color: var(--primary-blue);"></i> Step-by-Step Learning Roadmap
+    </h1>
+    <p class="page-subtitle">A structured 6-month college student progression from fundamentals to production readiness.</p>
+  </div>
+  
+  <!-- Career Selector Dropdown -->
+  <div>
+    <form method="GET" action="{{ url_for('roadmap') }}" style="display: flex; gap: 0.5rem; align-items: center;">
+      <label for="roleSwitch" style="font-size: 0.88rem; font-weight: 600; color: var(--secondary-navy); white-space: nowrap;">
+        Select Career Track:
+      </label>
+      <select id="roleSwitch" name="role" class="form-select" onchange="this.form.submit()" style="min-width: 240px; padding: 0.5rem 0.75rem;">
+        {% for r in available_roles %}
+          <option value="{{ r }}" {% if current_role == r %}selected{% endif %}>{{ r }}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+</div>
+
+<!-- Overview & Progress Header Card -->
+<div class="card" style="margin-bottom: 2rem;">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+    <div>
+      <span class="stage-badge">Career Track</span>
+      <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--primary-navy); margin-top: 0.2rem;">
+        {{ roadmap.role }}
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 760px; margin-top: 0.35rem;">
+        {{ roadmap.overview }}
+      </p>
+    </div>
+    
+    <!-- Overall Progress Meter -->
+    <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; min-width: 250px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--secondary-navy);">Roadmap Completion</span>
+        <span id="progressPercent" style="font-size: 1.25rem; font-weight: 800; color: var(--primary-blue);">0%</span>
+      </div>
+      <div class="progress-track" style="height: 10px;">
+        <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+      </div>
+      <div id="progressCount" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem; text-align: right;">
+        0 of {{ total_tasks }} milestones completed
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Roadmap Stages Timeline -->
+<div class="roadmap-timeline">
+  {% for stage in roadmap.stages %}
+    <div class="roadmap-stage-card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+        <div>
+          <span class="stage-badge">Phase {{ loop.index }}</span>
+          <h3 class="stage-title">{{ stage.name }}</h3>
+          <div class="stage-timeframe">
+            <i class="fa-regular fa-calendar-check" style="color: var(--primary-blue);"></i> {{ stage.timeframe }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills to Master -->
+      <div style="margin-bottom: 1.25rem;">
+        <h4 style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.45rem;">
+          <i class="fa-solid fa-code"></i> Skills to Master in this Phase:
+        </h4>
+        <div class="pill-container">
+          {% for skill in stage.skills %}
+            <span class="pill pill-matched">{{ skill }}</span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Key Conceptual Topics -->
+      <div style="margin-bottom: 1.25rem; background: #f8fafc; border-radius: var(--radius-md); padding: 1rem; border: 1px solid var(--border-color);">
+        <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--secondary-navy); margin-bottom: 0.5rem;">
+          <i class="fa-solid fa-book-bookmark" style="color: var(--primary-blue);"></i> Core Concepts & Theory:
+        </h4>
+        <ul style="padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          {% for topic in stage.topics %}
+            <li>{{ topic }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Hands-on Suggested Projects -->
+      <div style="margin-bottom: 1.25rem;">
+        <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--secondary-navy); margin-bottom: 0.65rem;">
+          <i class="fa-solid fa-laptop-code" style="color: var(--success-green);"></i> Recommended Portfolio Projects:
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+          {% for proj in stage.projects %}
+            <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; background: #ffffff;">
+              <h5 style="font-size: 0.95rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.35rem;">
+                <i class="fa-regular fa-folder-open" style="color: var(--primary-blue);"></i> {{ proj.title }}
+              </h5>
+              <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">
+                {{ proj.description }}
+              </p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Interactive Practice Tasks Checklist -->
+      <div>
+        <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--secondary-navy); margin-bottom: 0.5rem;">
+          <i class="fa-solid fa-list-check" style="color: var(--warning-amber);"></i> Practice Tasks & Milestones:
+        </h4>
+        <ul class="task-checklist">
+          {% for task in stage.tasks %}
+            <li class="task-item {% if task.id in completed_tasks %}completed{% endif %}" id="item_{{ task.id }}">
+              <input type="checkbox" id="{{ task.id }}" value="{{ task.id }}" 
+                     {% if task.id in completed_tasks %}checked{% endif %}
+                     onchange="toggleTask('{{ task.id }}')">
+              <label for="{{ task.id }}" style="cursor: pointer; flex: 1;">{{ task.text }}</label>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  const currentRole = {{ current_role | tojson }};
+  const studentId = {{ (student_id | default(0)) | tojson }};
+
+  function updateProgressUI() {
+    const allCheckboxes = document.querySelectorAll('.task-checklist input[type="checkbox"]');
+    const total = allCheckboxes.length;
+    let completed = 0;
+    
+    allCheckboxes.forEach(cb => {
+      const parentItem = document.getElementById('item_' + cb.id);
+      if (cb.checked) {
+        completed++;
+        if (parentItem) parentItem.classList.add('completed');
+      } else {
+        if (parentItem) parentItem.classList.remove('completed');
+      }
+    });
+
+    const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+    document.getElementById('progressPercent').innerText = percent + '%';
+    document.getElementById('progressBar').style.width = percent + '%';
+    document.getElementById('progressCount').innerText = `${completed} of ${total} milestones completed`;
+  }
+
+  function toggleTask(taskId) {
+    updateProgressUI();
+    
+    // Collect all checked tasks
+    const checked = [];
+    document.querySelectorAll('.task-checklist input[type="checkbox"]:checked').forEach(cb => {
+      checked.push(cb.value);
+    });
+
+    // Save to LocalStorage for offline persistence
+    localStorage.setItem('roadmap_' + currentRole, JSON.stringify(checked));
+
+    // Send async update to Flask backend
+    fetch("{{ url_for('save_roadmap_progress_api') }}", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        role: currentRole,
+        completed_tasks: checked
+      })
+    }).catch(err => console.log('Saved to local storage'));
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if local storage has any additional checked tasks
+    const saved = localStorage.getItem('roadmap_' + currentRole);
+    if (saved) {
+      try {
+        const taskIds = JSON.parse(saved);
+        taskIds.forEach(id => {
+          const cb = document.getElementById(id);
+          if (cb) cb.checked = true;
+        });
+      } catch(e) {}
+    }
+    updateProgressUI();
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+
+{% block title %}Student Profile & Resume - CareerAI Navigator{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">
+      <i class="fa-solid fa-user-astronaut" style="color: var(--primary-blue);"></i> Student Profile & Skills
+    </h1>
+    <p class="page-subtitle">Upload your PDF resume to auto-detect skills or enter your technical background manually.</p>
+  </div>
+  <div>
+    <a href="{{ url_for('history') }}" class="btn btn-secondary btn-sm">
+      <i class="fa-solid fa-clock-rotate-left"></i> View Past Saved Profiles
+    </a>
+  </div>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 2rem; align-items: start;">
+  
+  <!-- Left Column: Resume Upload Section -->
+  <div>
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <div class="card-header">
+        <h2 class="card-title" style="font-size: 1.15rem;">
+          <i class="fa-solid fa-file-pdf" style="color: #ef4444;"></i> Resume Parser (PDF)
+        </h2>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        Upload your existing resume. The system uses <strong>PyPDF2</strong> to extract text and match technical skills automatically.
+      </p>
+
+      <form action="{{ url_for('upload_resume') }}" method="POST" enctype="multipart/form-data" id="resumeForm">
+        <div class="upload-dropzone" id="dropZone" onclick="document.getElementById('resumeFileInput').click();">
+          <div class="dropzone-icon">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <h3 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">Click to Upload Resume</h3>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.8rem;">Supports .PDF format (Max 5MB)</p>
+          <span class="btn btn-secondary btn-sm" id="fileSelectBtn">
+            <i class="fa-solid fa-folder-open"></i> Browse PDF
+          </span>
+          <input type="file" name="resume_file" id="resumeFileInput" accept=".pdf" style="display: none;" onchange="handleFileSelected(this)">
+          <div id="selectedFileName" style="margin-top: 0.85rem; font-size: 0.85rem; font-weight: 600; color: var(--primary-blue); display: none;"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1.25rem;" id="uploadSubmitBtn">
+          <i class="fa-solid fa-bolt"></i> Extract Skills from Resume
+        </button>
+      </form>
+
+      {% if detected_resume %}
+        <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border-color);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <strong style="font-size: 0.9rem; color: var(--success-green);">
+              <i class="fa-solid fa-circle-check"></i> {{ detected_resume.skills_count }} Skills Detected!
+            </strong>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">{{ detected_resume.word_count }} words parsed</span>
+          </div>
+          <div class="pill-container" style="margin-top: 0.5rem;">
+            {% for skill in detected_resume.skills %}
+              <span class="pill pill-matched">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <div style="margin-top: 1.5rem; background: #f8fafc; border-radius: var(--radius-md); padding: 0.9rem; font-size: 0.82rem; color: var(--text-muted);">
+        <i class="fa-solid fa-circle-info" style="color: var(--primary-blue);"></i> 
+        <strong>Note:</strong> If you do not have a PDF resume ready, you can simply type or pick your skills in the form on the right.
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: Student Profile Form -->
+  <div>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title" style="font-size: 1.2rem;">
+          <i class="fa-solid fa-address-card" style="color: var(--primary-blue);"></i> Student Profile & Skill Details
+        </h2>
+      </div>
+
+      <form action="{{ url_for('process_recommendations') }}" method="POST" id="profileForm">
+        
+        <!-- Full Name -->
+        <div class="form-group">
+          <label class="form-label" for="studentName">
+            Full Name <span class="required">*</span>
+          </label>
+          <input type="text" class="form-control" id="studentName" name="name" 
+                 value="{{ profile_data.name if profile_data else '' }}" 
+                 placeholder="e.g. John Doe / Priya Sharma" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <!-- Education Level -->
+          <div class="form-group">
+            <label class="form-label" for="educationLevel">
+              Education Level <span class="required">*</span>
+            </label>
+            <select class="form-select" id="educationLevel" name="education" required>
+              <option value="B.Tech (Computer Science / IT)" {% if not profile_data or profile_data.education == 'B.Tech (Computer Science / IT)' %}selected{% endif %}>B.Tech (Computer Science / IT)</option>
+              <option value="B.Tech (ECE / Electrical)" {% if profile_data and profile_data.education == 'B.Tech (ECE / Electrical)' %}selected{% endif %}>B.Tech (ECE / Electrical)</option>
+              <option value="B.E. (Computer Engineering)" {% if profile_data and profile_data.education == 'B.E. (Computer Engineering)' %}selected{% endif %}>B.E. (Computer Engineering)</option>
+              <option value="BCA (Computer Applications)" {% if profile_data and profile_data.education == 'BCA (Computer Applications)' %}selected{% endif %}>BCA (Computer Applications)</option>
+              <option value="MCA (Master of Computer Applications)" {% if profile_data and profile_data.education == 'MCA (Master of Computer Applications)' %}selected{% endif %}>MCA (Master of Computer Applications)</option>
+              <option value="B.Sc (Computer Science / Data)" {% if profile_data and profile_data.education == 'B.Sc (Computer Science / Data)' %}selected{% endif %}>B.Sc (Computer Science / Data)</option>
+              <option value="M.Tech (Computer Science)" {% if profile_data and profile_data.education == 'M.Tech (Computer Science)' %}selected{% endif %}>M.Tech (Computer Science)</option>
+            </select>
+          </div>
+
+          <!-- Experience Level -->
+          <div class="form-group">
+            <label class="form-label" for="experienceLevel">
+              Experience Level
+            </label>
+            <select class="form-select" id="experienceLevel" name="experience_level">
+              <option value="Entry-Level / Fresher (0-1 Years)" {% if not profile_data or 'Fresher' in profile_data.experience_level %}selected{% endif %}>Entry-Level / Fresher (0-1 Years)</option>
+              <option value="Junior Engineer (1-2 Years)" {% if profile_data and '1-2' in profile_data.experience_level %}selected{% endif %}>Junior Engineer (1-2 Years)</option>
+              <option value="College Student (Undergraduate)" {% if profile_data and 'College' in profile_data.experience_level %}selected{% endif %}>College Student (Undergraduate)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="form-group">
+          <label class="form-label" for="skillsInput">
+            Technical Skills (Comma-separated) <span class="required">*</span>
+          </label>
+          <textarea class="form-control" id="skillsInput" name="skills" rows="3" 
+                    placeholder="e.g. Python, SQL, HTML, CSS, JavaScript, React, Machine Learning, Git" required>{{ profile_data.skills if profile_data else '' }}</textarea>
+          <div class="form-hint">
+            Tip: Click badges below to instantly append common skills to your list.
+          </div>
+
+          <!-- Quick Add Badge Selector -->
+          <div class="skill-badges-container" id="quickAddBadges">
+            <span class="skill-tag" onclick="addSkill('Python')">+ Python</span>
+            <span class="skill-tag" onclick="addSkill('JavaScript')">+ JavaScript</span>
+            <span class="skill-tag" onclick="addSkill('HTML')">+ HTML</span>
+            <span class="skill-tag" onclick="addSkill('CSS')">+ CSS</span>
+            <span class="skill-tag" onclick="addSkill('React')">+ React</span>
+            <span class="skill-tag" onclick="addSkill('Node.js')">+ Node.js</span>
+            <span class="skill-tag" onclick="addSkill('SQL')">+ SQL</span>
+            <span class="skill-tag" onclick="addSkill('Machine Learning')">+ Machine Learning</span>
+            <span class="skill-tag" onclick="addSkill('Scikit-learn')">+ Scikit-learn</span>
+            <span class="skill-tag" onclick="addSkill('Pandas')">+ Pandas</span>
+            <span class="skill-tag" onclick="addSkill('NumPy')">+ NumPy</span>
+            <span class="skill-tag" onclick="addSkill('Flask')">+ Flask</span>
+            <span class="skill-tag" onclick="addSkill('Django')">+ Django</span>
+            <span class="skill-tag" onclick="addSkill('AWS')">+ AWS</span>
+            <span class="skill-tag" onclick="addSkill('Docker')">+ Docker</span>
+            <span class="skill-tag" onclick="addSkill('Git')">+ Git</span>
+            <span class="skill-tag" onclick="addSkill('Power BI')">+ Power BI</span>
+            <span class="skill-tag" onclick="addSkill('Linux')">+ Linux</span>
+            <span class="skill-tag" onclick="addSkill('Network Security')">+ Network Security</span>
+            <span class="skill-tag" onclick="addSkill('Flutter')">+ Flutter</span>
+            <span class="skill-tag" onclick="addSkill('Figma')">+ Figma</span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <!-- Interests -->
+          <div class="form-group">
+            <label class="form-label" for="interestsInput">
+              Technical Interests & Passions
+            </label>
+            <input type="text" class="form-control" id="interestsInput" name="interests"
+                   value="{{ profile_data.interests if profile_data else '' }}"
+                   placeholder="e.g. web development, AI, data analysis, cybersecurity">
+            <div class="form-hint">Used for TF-IDF content similarity weighting.</div>
+          </div>
+
+          <!-- Preferred Job Role -->
+          <div class="form-group">
+            <label class="form-label" for="preferredRole">
+              Preferred Career Track (Optional)
+            </label>
+            <select class="form-select" id="preferredRole" name="preferred_role">
+              <option value="">-- No Specific Preference (All Careers) --</option>
+              <option value="Full Stack Developer" {% if profile_data and profile_data.preferred_role == 'Full Stack Developer' %}selected{% endif %}>Full Stack Developer</option>
+              <option value="Data Analyst" {% if profile_data and profile_data.preferred_role == 'Data Analyst' %}selected{% endif %}>Data Analyst</option>
+              <option value="Machine Learning Engineer" {% if profile_data and profile_data.preferred_role == 'Machine Learning Engineer' %}selected{% endif %}>Machine Learning Engineer</option>
+              <option value="Python Developer" {% if profile_data and profile_data.preferred_role == 'Python Developer' %}selected{% endif %}>Python Developer</option>
+              <option value="Cybersecurity Analyst" {% if profile_data and profile_data.preferred_role == 'Cybersecurity Analyst' %}selected{% endif %}>Cybersecurity Analyst</option>
+              <option value="Cloud Engineer" {% if profile_data and profile_data.preferred_role == 'Cloud Engineer' %}selected{% endif %}>Cloud Engineer</option>
+              <option value="DevOps Engineer" {% if profile_data and profile_data.preferred_role == 'DevOps Engineer' %}selected{% endif %}>DevOps Engineer</option>
+              <option value="Mobile App Developer" {% if profile_data and profile_data.preferred_role == 'Mobile App Developer' %}selected{% endif %}>Mobile App Developer</option>
+              <option value="UI/UX Designer & Frontend Engineer" {% if profile_data and profile_data.preferred_role == 'UI/UX Designer & Frontend Engineer' %}selected{% endif %}>UI/UX Designer & Frontend Engineer</option>
+              <option value="Data Engineer" {% if profile_data and profile_data.preferred_role == 'Data Engineer' %}selected{% endif %}>Data Engineer</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+          <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: 1.02rem;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate ML Recommendations
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="fillSampleData()">
+            <i class="fa-solid fa-clipboard-check"></i> Fill Sample Student
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  function handleFileSelected(input) {
+    if (input.files && input.files[0]) {
+      const fileName = input.files[0].name;
+      const displayElem = document.getElementById('selectedFileName');
+      displayElem.innerText = 'Selected: ' + fileName;
+      displayElem.style.display = 'block';
+      document.getElementById('fileSelectBtn').innerHTML = '<i class="fa-solid fa-check"></i> ' + fileName;
+    }
+  }
+
+  function addSkill(skill) {
+    const input = document.getElementById('skillsInput');
+    let current = input.value.trim();
+    if (!current) {
+      input.value = skill;
+    } else {
+      const skillsArr = current.split(',').map(s => s.trim().toLowerCase());
+      if (!skillsArr.includes(skill.toLowerCase())) {
+        input.value = current + ', ' + skill;
+      }
+    }
+    input.focus();
+  }
+
+  function fillSampleData() {
+    document.getElementById('studentName').value = 'Aarav Patel';
+    document.getElementById('educationLevel').value = 'B.Tech (Computer Science / IT)';
+    document.getElementById('skillsInput').value = 'Python, Scikit-learn, Pandas, NumPy, SQL, Machine Learning, Git, Flask';
+    document.getElementById('interestsInput').value = 'artificial intelligence, predictive modeling, data visualization';
+    document.getElementById('preferredRole').value = 'Machine Learning Engineer';
+  }
+</script>
+{% endblock %}

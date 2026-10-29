@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block title %}Demonstrative Job Portal - CareerAI Navigator{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">
+      <i class="fa-solid fa-briefcase" style="color: var(--primary-blue);"></i> Demonstrative Job Opportunities
+    </h1>
+    <p class="page-subtitle">
+      Explore entry-level jobs tailored to recommended roles and skill profiles.
+    </p>
+  </div>
+  <div>
+    <a href="{{ url_for('recommendations') }}" class="btn btn-secondary btn-sm">
+      <i class="fa-solid fa-bullseye"></i> Back to Recommendations
+    </a>
+  </div>
+</div>
+
+<!-- Clear Academic Demonstration Banner -->
+<div class="alert alert-warning" style="margin-bottom: 2rem;">
+  <i class="fa-solid fa-shield-halved"></i>
+  <div>
+    <strong>Demonstration Data Notice:</strong>
+    These listings are curated sample vacancies for academic project demonstration and matching verification. They do not represent real-time live company vacancies.
+  </div>
+</div>
+
+<!-- Filters & Search Bar -->
+<div class="card" style="margin-bottom: 2rem; padding: 1.25rem;">
+  <form method="GET" action="{{ url_for('jobs') }}" style="display: grid; grid-template-columns: 2fr 1.5fr 1fr auto; gap: 1rem; align-items: flex-end;">
+    <!-- Keyword Search -->
+    <div>
+      <label class="form-label" for="keywordInput" style="font-size: 0.82rem;">Search Role or Company</label>
+      <input type="text" class="form-control" id="keywordInput" name="q" value="{{ query_search }}" placeholder="e.g. Python, React, Junior, TechCorp">
+    </div>
+
+    <!-- Role Filter -->
+    <div>
+      <label class="form-label" for="roleSelect" style="font-size: 0.82rem;">Filter by Career Path</label>
+      <select class="form-select" id="roleSelect" name="role">
+        <option value="">All Career Paths</option>
+        {% for r in available_roles %}
+          <option value="{{ r }}" {% if selected_role == r %}selected{% endif %}>{{ r }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Job Type -->
+    <div>
+      <label class="form-label" for="typeSelect" style="font-size: 0.82rem;">Job Type</label>
+      <select class="form-select" id="typeSelect" name="type">
+        <option value="">All Types</option>
+        <option value="Full-time" {% if selected_type == 'Full-time' %}selected{% endif %}>Full-time</option>
+        <option value="Internship" {% if selected_type == 'Internship' %}selected{% endif %}>Internship</option>
+        <option value="Hybrid" {% if selected_type == 'Hybrid' %}selected{% endif %}>Hybrid / Remote</option>
+      </select>
+    </div>
+
+    <!-- Submit / Reset Buttons -->
+    <div style="display: flex; gap: 0.5rem;">
+      <button type="submit" class="btn btn-primary" style="padding: 0.75rem 1.2rem;">
+        <i class="fa-solid fa-filter"></i> Filter
+      </button>
+      <a href="{{ url_for('jobs') }}" class="btn btn-secondary" style="padding: 0.75rem 1rem;" title="Reset Filters">
+        <i class="fa-solid fa-rotate-left"></i>
+      </a>
+    </div>
+  </form>
+</div>
+
+<!-- Job Count Summary -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+  <div style="font-size: 0.95rem; font-weight: 600; color: var(--secondary-navy);">
+    Showing <span style="color: var(--primary-blue);">{{ jobs|length }}</span> matching demonstration positions
+  </div>
+  {% if selected_role %}
+    <span class="pill pill-matched" style="font-size: 0.82rem;">
+      Role: {{ selected_role }}
+    </span>
+  {% endif %}
+</div>
+
+<!-- Job Cards Grid -->
+{% if jobs %}
+  <div class="job-grid">
+    {% for job in jobs %}
+      <div class="job-card">
+        <div class="job-company">
+          <i class="fa-regular fa-building"></i> {{ job.company }}
+        </div>
+        <h3 class="job-title">{{ job.title }}</h3>
+        
+        <div class="job-meta-row">
+          <span class="job-meta-item">
+            <i class="fa-solid fa-location-dot" style="color: var(--danger-red);"></i> {{ job.location }}
+          </span>
+          <span class="job-meta-item">
+            <i class="fa-solid fa-clock" style="color: var(--primary-blue);"></i> {{ job.job_type }}
+          </span>
+          <span class="job-meta-item">
+            <i class="fa-solid fa-user-tie" style="color: var(--text-muted);"></i> {{ job.experience_level }}
+          </span>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.5;">
+          {{ job.description }}
+        </p>
+
+        <!-- Required Skills -->
+        <div style="margin-bottom: 1.25rem;">
+          <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.35rem;">
+            Key Skills Required:
+          </div>
+          <div class="pill-container">
+            {% for skill in job.skills_list %}
+              <span class="pill {% if user_skills and skill.lower() in user_skills_lower %}pill-matched{% else %}pill-missing{% endif %}">
+                {{ skill }}
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="job-footer">
+          <div class="job-salary">
+            <i class="fa-solid fa-indian-rupee-sign"></i> {{ job.salary }}
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" 
+                  data-title="{{ job.title }}" 
+                  data-company="{{ job.company }}"
+                  onclick="openDemoApplyModal(this.dataset.title, this.dataset.company)">
+            <i class="fa-solid fa-paper-plane"></i> Apply Demo
+          </button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="card" style="text-align: center; padding: 3rem 1.5rem;">
+    <div style="font-size: 2.5rem; color: var(--text-light); margin-bottom: 0.75rem;">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem;">No matching demonstration jobs found</h3>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;">Try resetting your search query or selecting a different career path.</p>
+    <a href="{{ url_for('jobs') }}" class="btn btn-secondary btn-sm">
+      Clear Filters & Show All
+    </a>
+  </div>
+{% endif %}
+
+<!-- Simulated Apply Modal -->
+<div id="demoModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+  <div class="card" style="max-width: 480px; width: 90%; background: #fff; padding: 2rem; position: relative;">
+    <button onclick="closeDemoApplyModal()" style="position: absolute; top: 1.25rem; right: 1.25rem; background: none; border: none; font-size: 1.3rem; color: var(--text-muted); cursor: pointer;">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div style="font-size: 2.5rem; color: var(--success-green); margin-bottom: 0.75rem;">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+    <h3 id="modalJobTitle" style="font-size: 1.3rem; font-weight: 700; color: var(--primary-navy); margin-bottom: 0.25rem;"></h3>
+    <p id="modalCompany" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.25rem;"></p>
+    
+    <div class="alert alert-success" style="font-size: 0.88rem; margin-bottom: 1.25rem;">
+      <strong>Simulated Application Submitted!</strong> Your candidate profile and extracted skill vector have been dispatched to this demonstration recruiter pool.
+    </div>
+
+    <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 1rem; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+      <h4 style="font-weight: 700; color: var(--secondary-navy); margin-bottom: 0.35rem;">Interview Preparation Advice:</h4>
+      <ul style="padding-left: 1.2rem; line-height: 1.6;">
+        <li>Review your GitHub repository commits for relevant project code.</li>
+        <li>Review key technical questions in our <strong>Learning Roadmap</strong>.</li>
+        <li>Practice core DSA and system fundamentals.</li>
+      </ul>
+    </div>
+
+    <button onclick="closeDemoApplyModal()" class="btn btn-primary btn-block">
+      Got It, Close Window
+    </button>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  function openDemoApplyModal(title, company) {
+    document.getElementById('modalJobTitle').innerText = title;
+    document.getElementById('modalCompany').innerText = 'at ' + company;
+    const modal = document.getElementById('demoModal');
+    modal.style.display = 'flex';
+  }
+
+  function closeDemoApplyModal() {
+    document.getElementById('demoModal').style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    const modal = document.getElementById('demoModal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  };
+</script>
+{% endblock %}

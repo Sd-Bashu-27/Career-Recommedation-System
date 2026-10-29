@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Recommendation History - CareerAI Navigator{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">
+      <i class="fa-solid fa-clock-rotate-left" style="color: var(--primary-blue);"></i> Saved Recommendation History
+    </h1>
+    <p class="page-subtitle">Archived recommendation reports persisted automatically in the SQLite database.</p>
+  </div>
+  <div>
+    <a href="{{ url_for('profile') }}" class="btn btn-primary btn-sm">
+      <i class="fa-solid fa-plus"></i> New Student Assessment
+    </a>
+  </div>
+</div>
+
+{% if history_records %}
+  <div class="card">
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; text-align: left;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-muted);">
+            <th style="padding: 0.85rem;">ID</th>
+            <th style="padding: 0.85rem;">Date / Time</th>
+            <th style="padding: 0.85rem;">Student Name</th>
+            <th style="padding: 0.85rem;">Top Career Recommendation</th>
+            <th style="padding: 0.85rem;">Match Score</th>
+            <th style="padding: 0.85rem;">Matched Skills</th>
+            <th style="padding: 0.85rem;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for h in history_records %}
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 0.85rem; font-weight: 700;">#{{ h.id }}</td>
+              <td style="padding: 0.85rem; color: var(--text-muted); font-size: 0.82rem;">{{ h.created_at }}</td>
+              <td style="padding: 0.85rem; font-weight: 600; color: var(--primary-navy);">{{ h.student_name }}</td>
+              <td style="padding: 0.85rem; font-weight: 700; color: var(--primary-blue);">
+                <i class="fa-solid fa-briefcase"></i> {{ h.top_career }}
+              </td>
+              <td style="padding: 0.85rem;">
+                <span class="pill pill-matched" style="font-weight: 700;">{{ h.match_score }}%</span>
+              </td>
+              <td style="padding: 0.85rem; font-size: 0.82rem; color: var(--text-muted); max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                {{ h.matched_skills }}
+              </td>
+              <td style="padding: 0.85rem;">
+                <a href="{{ url_for('view_history_item', record_id=h.id) }}" class="btn btn-secondary btn-sm" style="padding: 0.35rem 0.75rem; font-size: 0.82rem;">
+                  <i class="fa-solid fa-eye"></i> View Report
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% else %}
+  <div class="card" style="text-align: center; padding: 3.5rem 1.5rem;">
+    <div style="font-size: 3rem; color: var(--text-light); margin-bottom: 1rem;">
+      <i class="fa-solid fa-folder-open"></i>
+    </div>
+    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary-navy);">
+      No Prior Assessments Found
+    </h3>
+    <p style="color: var(--text-muted); font-size: 0.92rem; max-width: 500px; margin: 0 auto 1.5rem;">
+      No student profiles have been evaluated yet. Fill out your technical skills or upload a resume to generate your first recommendation!
+    </p>
+    <a href="{{ url_for('profile') }}" class="btn btn-primary">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> Create First Assessment
+    </a>
+  </div>
+{% endif %}
+{% endblock %}
